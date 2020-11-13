@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 
 
-app.use(express.static('client/public'));
+app.use(express.static('client/dist'));
 
 
 module.exports = app;
