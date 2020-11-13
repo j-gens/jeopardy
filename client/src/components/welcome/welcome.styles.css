@@ -1,0 +1,24 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+  min-width: 70%;
+}
+
+.welcome--message {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.welcome--options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.welcome--option {
+  border: 2px solid black;
+  background-color: var(--blue);
+  text-align: center;
+  padding: 20px;
+  width: 40%;
+}
