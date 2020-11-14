@@ -9,12 +9,17 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      players: [
+        {name: 'Player 1', score: 0},
+        {name: 'Player 2', score: 0},
+        {name: 'Player 3', score: 0},
+      ],
     };
   }
 
   render() {
     const { board } = this.props;
+    const { players } = this.state;
     return (
       <div className='gamespace'>
         <div className='board'>
@@ -25,7 +30,11 @@ class Board extends React.Component {
           }
         </div>
         <div className='scoreboard'>
-          scoreboard
+          {
+            players.map((player, index) =>
+              <Score player={player} key={index} />
+            )
+          }
         </div>
       </div>
     );
