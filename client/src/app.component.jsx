@@ -11,13 +11,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       gameId: '',
+      isDouble: false,
       board: [],
     }
   }
 
   generateGame = () => {
-    console.log('hello');
-
     axios.get('/api/newgame/')
       .then((response) => {
         this.setState({
@@ -32,23 +31,26 @@ class App extends React.Component {
   render() {
     const { board } = this.state;
     return (
-      <>
-        <div className='app'>
+      <div className='homepage'>
+        <div className='page-title'>
+          <h1>JEOPARDY</h1>
+        </div>
+        <div className='game'>
           {
             board.length > 0 ?
               <Board board={board} /> :
               <Welcome generateGame={this.generateGame} />
           }
         </div>
-        <footer>
+        <div className='footnote'>
           <span>
             This is a fan-created version of Jeopardy as an homage to the game and the late, great Alex Trebek.
           </span>
           <span>
             The Jeopardy! game show and all elements thereof, including but not limited to copyright and trademark thereto, are the property of Jeopardy Productions, Inc. and are protected under law. This website is not affiliated with, sponsored by, or operated by Jeopardy Productions, Inc.
           </span>
-        </footer>
-      </>
+        </div>
+      </div>
     );
   }
 }
