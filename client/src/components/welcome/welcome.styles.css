@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   min-width: 70%;
+  padding: 60px 0px;
 }
 
 .welcome--message {
   margin-bottom: 20px;
+  color: white;
   text-align: center;
 }
 
@@ -21,4 +23,6 @@
   text-align: center;
   padding: 20px;
   width: 40%;
+  cursor: pointer;
+  border-radius: 5px;
 }
