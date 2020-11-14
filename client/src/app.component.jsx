@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import Board from './components/board/board.component.jsx';
 import Welcome from './components/welcome/welcome.component.jsx';
@@ -10,15 +11,34 @@ class App extends React.Component {
     super(props);
     this.state = {
       gameId: '',
+      board: [],
     }
   }
 
+  generateGame = () => {
+    console.log('hello');
+
+    axios.get('/api/newgame/')
+      .then((response) => {
+        this.setState({
+          board: response.data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render() {
-    const { gameId } = this.state;
+    const { board } = this.state;
     return (
       <>
         <div className='app'>
-          {gameId.length > 0 ? <Board /> : <Welcome />}
+          {
+            board.length > 0 ?
+              <Board board={board} /> :
+              <Welcome generateGame={this.generateGame} />
+          }
         </div>
         <footer>
           <span>
