@@ -6,20 +6,13 @@ import './welcome.styles.css';
 const Welcome = ({ generateGame, joinGame }) => (
   <div className='welcome'>
     <div className='welcome--message'>
-      Welcome to Jeopardy!  Choose an option below:
+      Welcome to Jeopardy!  Are you ready to have some fun?
     </div>
-    <div className='welcome--options'>
-      <div className='welcome--option' onClick={generateGame}>
+      <div className='welcome--button' onClick={generateGame}>
         <h3>
           Start New Game
         </h3>
       </div>
-      <div className='welcome--option' onClick={joinGame}>
-        <h3>
-          Join Current Game
-        </h3>
-      </div>
-    </div>
   </div>
 );
 
