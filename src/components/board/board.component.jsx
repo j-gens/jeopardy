@@ -9,17 +9,19 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: [
-        {name: 'Player 1', score: 0},
-        {name: 'Player 2', score: 0},
-        {name: 'Player 3', score: 0},
-      ],
+      scores: []
     };
+  }
+
+  componentDidMount() {
+    const { players } = this.props;
+    let scores = new Array(players).fill(0);
+    this.setState({ scores });
   }
 
   render() {
     const { board } = this.props;
-    const { players } = this.state;
+    const { scores } = this.state;
     return (
       <div className='gamespace'>
         <div className='board'>
@@ -31,8 +33,8 @@ class Board extends React.Component {
         </div>
         <div className='scoreboard'>
           {
-            players.map((player, index) =>
-              <Score player={player} key={index} />
+            scores.map((score, index) =>
+              <Score score={score} key={index} />
             )
           }
         </div>
