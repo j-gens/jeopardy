@@ -1,8 +1,8 @@
-const axios = require('axios');
+import axios from 'axios';
 
 
 // Request 6 category IDs from jService API
-const getGameCategories = (callback) => {
+export const getGameCategories = (callback) => {
   axios.get('http://jservice.io/api/categories?count=6')
     .then((categories) => {
       const categoryIds = [];
@@ -16,7 +16,7 @@ const getGameCategories = (callback) => {
 }
 
 // Request game clues for given categories from jService API
-const getGameClues = (categories, callback) => {
+export const getGameClues = (categories, callback) => {
   const requestedClues = [];
   // Request clues for each category, limit to first 5 clues for each
   categories.forEach((category) => {
@@ -28,25 +28,4 @@ const getGameClues = (categories, callback) => {
   Promise.all(requestedClues)
     .then((clues) => callback(null, clues))
     .catch((error) => callback(error));
-}
-
-// Process clue dollar amount to match single/double Jeopardy values
-const makeConsistentClueValues = (categories, game, callback) => {
-  // Determine if single or double Jeopardy round
-  let values = [100, 200, 300, 400, 500];
-  if (game === 'true') values = [200, 400, 600, 800, 1000];
-  // Iterate through all the clues to update values as needed
-  categories.forEach((category) => {
-    category.forEach((clue, index) => {
-      clue.value = values[index];
-    });
-  });
-  callback(categories);
-}
-
-
-module.exports = {
-  getGameCategories,
-  getGameClues,
-  makeConsistentClueValues,
 }
