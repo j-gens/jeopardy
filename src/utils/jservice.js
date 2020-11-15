@@ -1,3 +1,6 @@
+import axios from 'axios';
+
+
 // Generate 6 random category IDs to query jService API for clues
 export const generateCategoryIds = () => {
   const categories = [];
@@ -5,6 +8,21 @@ export const generateCategoryIds = () => {
     categories.push(Math.floor(Math.random() * 18000 + 1));
   }
   return categories;
+}
+
+// Request game clues for given categories from jService API
+export const getGameClues = (categories, callback) => {
+  const requestedClues = [];
+  // Request clues for each category, limit to first 5 clues for each
+  categories.forEach((category) => {
+    requestedClues.push(
+      axios.get(`http://jservice.io/api/clues?category=${category}`)
+        .then((clues) => clues.data.slice(0, 5)));
+  });
+  // Wait for all requests to resolve
+  Promise.all(requestedClues)
+    .then((clues) => callback(null, clues))
+    .catch((error) => callback(error));
 }
 
 // Process clue dollar amount to match single/double Jeopardy values
