@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './client/src/index.jsx',
+  entry: './src/index.jsx',
   // output: {
   //   filename: '[name].bundle.js',
   //   chunkFilename: '[name].bundle.js',
@@ -11,7 +11,7 @@ module.exports = {
   // },
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "./client/dist")
+    path: path.resolve(__dirname, "./dist")
   },
   module: {
     rules: [
