@@ -5,7 +5,7 @@
   width: 32%;
 }
 
-.player-score {
+.player > div {
   text-align: center;
   background-color: var(--blue);
   padding: 10px;
@@ -14,13 +14,12 @@
 }
 
 .player-name {
-  text-align: center;
-  background-color: var(--blue);
-  padding: 10px;
   color: white;
-  size: 18px;
+  font-size: 24px;
   font-family: Arial, Helvetica, sans-serif;
-  border: 1px solid black;
-  margin: 2px;
-  cursor: pointer;
+}
+
+.player-instructions {
+  color: white;
+  font-size: 16px;
 }
