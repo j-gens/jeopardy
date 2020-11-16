@@ -26,6 +26,7 @@ export const getGameClues = (categories, callback) => {
 }
 
 // Process clue dollar amount to match single/double Jeopardy values
+// Also add property to initially display each clue on the board
 export const makeConsistentClueValues = (categories, isDouble, callback) => {
   // Determine if single or double Jeopardy round
   let values = [100, 200, 300, 400, 500];
@@ -34,6 +35,7 @@ export const makeConsistentClueValues = (categories, isDouble, callback) => {
   categories.forEach((category) => {
     category.forEach((clue, index) => {
       clue.value = values[index];
+      clue.display = true;
     });
   });
   callback(categories);
