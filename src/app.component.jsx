@@ -1,8 +1,9 @@
 import React from 'react';
-import axios from 'axios';
+import update from 'immutability-helper';
 
 import Board from './components/board/board.component.jsx';
 import Welcome from './components/welcome/welcome.component.jsx';
+import { getGameClues, generateCategoryIds, makeConsistentClueValues } from './utils/jservice.js';
 import './app.styles.css';
 
 
@@ -10,7 +11,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameId: '',
       isDouble: false,
       board: [],
     }
@@ -18,15 +18,23 @@ class App extends React.Component {
 
   generateGame = () => {
     const { isDouble } = this.state;
-    axios.get(`/api/newgame?double=${isDouble}`)
-      .then((response) => {
-        this.setState({
-          board: response.data
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+    const categories = generateCategoryIds();
+    getGameClues(categories, (error, results) => {
+      if (error) console.log('error getting clues: ', error);
+      makeConsistentClueValues(results, isDouble, (board) => {
+        this.setState({ board }, () => console.log(board));
       });
+    });
+  }
+
+  // Removes a clue from display on the board after it is selected
+  // Takes categoryIndex (catI) and clueIndex (clueI)
+  updateClueDisplay = (catI, clueI) => {
+    const { board } = this.state;
+    const newBoard = update(board, {[catI]: {[clueI]: {display: {$set: false}}}})
+    this.setState({
+      board: newBoard
+    });
   }
 
   render() {
@@ -39,7 +47,10 @@ class App extends React.Component {
         <div className='game'>
           {
             board.length > 0 ?
-              <Board board={board} /> :
+              <Board
+                board={board}
+                updateClueDisplay={this.updateClueDisplay}
+              /> :
               <Welcome generateGame={this.generateGame} />
           }
         </div>
