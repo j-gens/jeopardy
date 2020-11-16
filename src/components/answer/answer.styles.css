@@ -1,0 +1,40 @@
+.answer--compare {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.answer--appeal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.appeal-check {
+  display: flex;
+  flex-direction: column;
+}
+
+.appeal-button {
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgb(172, 172, 172);
+  padding: 7px 12px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--yellow);
+  text-shadow: 3px 3px black;
+  font-weight: 700;
+}
+
+.appeal-button:hover {
+  box-shadow: 0 0 5px 5px rgb(172, 172, 172);
+}
+
+.appeal-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
