@@ -1,5 +1,7 @@
 import React from 'react';
 
+import GuessForm from '../guess-form/guess-form.component.jsx';
+import Answer from '../answer/answer.component.jsx';
 import './clue.styles.css';
 
 
@@ -9,56 +11,83 @@ class Clue extends React.Component {
     this.state = {
       player: 0,
       buzzed: false,
+      displayForm: false,
+      displayAnswer: false,
+      isCorrect: false,
       guess: '',
     }
+    this.myRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.myRef.current.addEventListener('keydown', this.handleKeyDown);
+    this.myRef.current.focus();
+  }
+
+  componentWillUnmount() {
+    this.myRef.current.removeEventListener('keydown', this.handleKeyDown);
   }
 
   handleKeyDown = (event) => {
-    const { buzzed } = this.state;
     const keyCode = event.keyCode;
-    console.log('hello', keyCode);
-    // Do nothing if someone has already buzzed in
+    const { buzzed } = this.state;
+    // Do nothing if a player has already buzzed in
     if (buzzed) return;
     // Player 1 presses 'z' key to buzz in (keyCode = 90)
-    if (keyCode === 90) this.setState({ player: 1, buzzed: true });
+    if (keyCode === 90) {
+      this.setState({ player: 1, buzzed: true, displayForm: true });
+    }
     // Player 2 presses '/' key to buzz in (keyCode = 191)
-    if (keyCode === 191) this.setState({ player: 2, buzzed: true });
+    if (keyCode === 191) {
+      this.setState({ player: 2, buzzed: true, displayForm: true });
+    }
   }
 
-  handleChange = (event) => this.setState({guess: event.target.value})
+  checkAnswer = (guess) => {
+    const { answer } = this.props;
+    let correct = false;
+    // Ignore case when checking player's guess to answer
+    if (guess.toLowerCase() === answer.toLowerCase()) correct = true;
+    this.setState({
+      displayForm: false,
+      displayAnswer: true,
+      isCorrect: correct,
+      guess,
+    });
+  }
 
   render() {
-    const { player, buzzed, guess } = this.state;
-    const { clue } = this.props;
+    const { player, displayForm, displayAnswer, guess, isCorrect } = this.state;
+    const { clue, answer, value, updateScore } = this.props;
     return (
-      <div className='clue' onKeyDown={this.handleKeyDown} >
+      <div className='clue' tabIndex='0' ref={this.myRef} onKeyDown={this.handleKeyDown} >
         <div className='clue-text'>
           <h4>
             {clue}
           </h4>
         </div>
         <div className='clue-timer'>
-          timer here
+          - - - - - timer here - - - - -
         </div>
         <div className='clue-answer'>
           {
-            buzzed ?
+            displayForm ?
             (
-              <form onSubmit={this.handleSubmit}>
-                <label for='guess'>
-                  Player {player}! Who/What/Where/When is....
-                </label>
-                <input
-                  type='text'
-                  name='guess'
-                  id='guess'
-                  value={guess}
-                  onChange={this.handleChange}
-                />
-                <button type='submit'>
-                  Submit
-                </button>
-              </form>
+              <GuessForm player={player} checkAnswer={this.checkAnswer} />
+            ) :
+            ''
+          }
+          {
+            displayAnswer ?
+            (
+              <Answer
+                player={player}
+                answer={answer}
+                guess={guess}
+                value={value}
+                isCorrect={isCorrect}
+                updateScore={updateScore}
+              />
             ) :
             ''
           }
