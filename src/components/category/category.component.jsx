@@ -5,12 +5,17 @@ import CategoryCell from '../category-cell/category-cell.component.jsx';
 import './category.styles.css';
 
 
-const Category = ({ category, displayClue }) => (
+const Category = ({ category, ...otherProps }) => (
   <div className='category'>
     <CategoryTitle clue={category[0]} />
     {
       category.map((clue, index) =>
-        <CategoryCell clue={clue} displayClue={displayClue} key={index} />
+        <CategoryCell
+          clue={clue}
+          clueIndex={index}
+          {...otherProps}
+          key={index}
+        />
       )
     }
   </div>
