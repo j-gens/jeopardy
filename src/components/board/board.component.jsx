@@ -1,4 +1,5 @@
 import React from 'react';
+import update from 'immutability-helper';
 
 import Clue from '../clue/clue.component.jsx';
 import Category from '../category/category.component.jsx';
@@ -10,8 +11,6 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      one: 0,
-      two: 0,
       currentClue: '',
       currentAnswer: '',
       currentValue: 0,
@@ -33,19 +32,16 @@ class Board extends React.Component {
     })
   }
 
-  // update a player's score && remove Clue component from view
-  updateScore = (value, player) => {
-    const { scores } = this.state;
-    const updatedScore = this.state[player] + value;
-    this.setState({
-      [player]: updatedScore,
-      display: false,
-    });
+  // Update a player's score && remove Clue component from view
+  updateAfterAnswer = (value, player) => {
+    const { clueCounter } = this.state;
+    const { updatePlayerScore } = this.props;
+    this.setState({display: false}, () => updatePlayerScore(value, player, clueCounter));
   }
 
   render() {
-    const { board, updateClueDisplay } = this.props;
-    const { one, two, display, currentClue, currentAnswer, currentValue } = this.state;
+    const { board, updateClueDisplay, scores } = this.props;
+    const { display, currentClue, currentAnswer, currentValue } = this.state;
     return (
       <div className='gamespace'>
         <div className='board'>
@@ -55,7 +51,7 @@ class Board extends React.Component {
               clue={currentClue}
               answer={currentAnswer}
               value={currentValue}
-              updateScore={this.updateScore}
+              updateScore={this.updateAfterAnswer}
             /> :
             board.map((category, index) =>
               <Category
@@ -69,8 +65,11 @@ class Board extends React.Component {
           }
         </div>
         <div className='scoreboard'>
-          <Score score={one} key={1} />
-          <Score score={two} key={2} />
+          {
+            scores.map((score, index) =>
+              <Score score={score} player={index} key={index} />
+            )
+          }
         </div>
       </div>
     );
