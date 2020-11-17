@@ -11,6 +11,7 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      scores: [0, 0],
       currentClue: '',
       currentAnswer: '',
       currentValue: 0,
@@ -33,15 +34,30 @@ class Board extends React.Component {
   }
 
   // Update a player's score && remove Clue component from view
-  updateAfterAnswer = (value, player) => {
-    const { clueCounter } = this.state;
-    const { updatePlayerScore } = this.props;
-    this.setState({display: false}, () => updatePlayerScore(value, player, clueCounter));
+  updateScore = (value, player) => {
+    const { scores, clueCounter } = this.state;
+    const updatedScore = scores[player - 1] + value;
+    const newScores = update(scores, {[player - 1]: {$set: updatedScore}})
+    this.setState({
+      display: false,
+      scores: newScores
+    }, () => this.checkIfDoubleJeopardy());
+  }
+
+  // Check if round of game has been completed
+  checkIfDoubleJeopardy = () => {
+    const { clueCounter, scores } = this.state;
+    const { isDouble, generateGame, endGameSequence } = this.props;
+    if (clueCounter === 30 && isDouble) {
+      this.setState({clueCounter: 0}, this.generateGame);
+    } else if (clueCounter === 30 && !isDouble) {
+      this.endGameSequence(scores)
+    }
   }
 
   render() {
-    const { board, updateClueDisplay, scores } = this.props;
-    const { display, currentClue, currentAnswer, currentValue } = this.state;
+    const { board, updateClueDisplay } = this.props;
+    const { updateScore, scores, display, currentClue, currentAnswer, currentValue, clueCounter } = this.state;
     return (
       <div className='gamespace'>
         <div className='board'>
@@ -51,7 +67,8 @@ class Board extends React.Component {
               clue={currentClue}
               answer={currentAnswer}
               value={currentValue}
-              updateScore={this.updateAfterAnswer}
+              updateScore={this.updateScore}
+              key={clueCounter}
             /> :
             board.map((category, index) =>
               <Category
