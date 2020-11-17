@@ -19,12 +19,12 @@
   padding: 10px;
   font-size: 24px;
   border-radius: 5px;
-  border: 1px solid black;
-  box-shadow: 0 0 5px black;
+  border: 1px solid whitesmoke;
+  box-shadow: 0 0 5px rgb(172, 172, 172);
   background-color: var(--blue);
   cursor: pointer;
 }
 
 .guess-form button:hover {
-  box-shadow: 0 0 5px 5px black;
+  box-shadow: 0 0 5px 5px rgb(172, 172, 172);
 }
