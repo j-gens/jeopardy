@@ -14,7 +14,7 @@ const Category = ({ category, ...otherProps }) => (
           clue={clue}
           clueIndex={index}
           {...otherProps}
-          key={index}
+          key={clue.id}
         />
       )
     }
