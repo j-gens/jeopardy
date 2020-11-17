@@ -48,10 +48,11 @@ class Board extends React.Component {
   checkIfDoubleJeopardy = () => {
     const { clueCounter, scores } = this.state;
     const { isDouble, generateGame, endGameSequence } = this.props;
+    console.log('cluecounter', clueCounter)
     if (clueCounter === 30 && isDouble) {
-      this.setState({clueCounter: 0}, this.generateGame);
+      this.setState({clueCounter: 0}, generateGame);
     } else if (clueCounter === 30 && !isDouble) {
-      this.endGameSequence(scores)
+      endGameSequence(scores)
     }
   }
 
