@@ -22,14 +22,9 @@ class Answer extends React.Component {
     // If player appeal was approved, reverse score
     if (innerText === 'Yes') reverse = true;
     // If player wasn't correct & didn't win appeal, subtract score from their total
-
-    console.log('event', event)
-    console.log('to reverse, true true', !isCorrect, reverse);
-
     if (!isCorrect && !reverse) score *= -1;
     // Submit score and player to Board component
-    const writtenPlayer = (player === 1 ? 'one' : 'two');
-    updateScore(score, writtenPlayer);
+    updateScore(score, player);
   }
 
   render() {
