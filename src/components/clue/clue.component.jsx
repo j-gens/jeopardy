@@ -2,6 +2,7 @@ import React from 'react';
 
 import GuessForm from '../guess-form/guess-form.component.jsx';
 import Answer from '../answer/answer.component.jsx';
+import ClueTimer from '../clue-timer/clue-timer.component.jsx';
 import './clue.styles.css';
 
 
@@ -15,15 +16,19 @@ class Clue extends React.Component {
       displayAnswer: false,
       isCorrect: false,
       guess: '',
+      timesUp: false,
+      hideTimer: false,
     }
     this.myRef = React.createRef();
   }
 
+  // Add the keydown event listener and ensure appropriate div is in focus
   componentDidMount() {
     this.myRef.current.addEventListener('keydown', this.handleKeyDown);
     this.myRef.current.focus();
   }
 
+  // Remove the event listener
   componentWillUnmount() {
     this.myRef.current.removeEventListener('keydown', this.handleKeyDown);
   }
@@ -35,11 +40,21 @@ class Clue extends React.Component {
     if (buzzed) return;
     // Player 1 presses 'z' key to buzz in (keyCode = 90)
     if (keyCode === 90) {
-      this.setState({ player: 1, buzzed: true, displayForm: true });
+      this.setState({
+        player: 1,
+        buzzed: true,
+        displayForm: true,
+        hideTimer: true,
+      });
     }
     // Player 2 presses '/' key to buzz in (keyCode = 191)
     if (keyCode === 191) {
-      this.setState({ player: 2, buzzed: true, displayForm: true });
+      this.setState({
+        player: 2,
+        buzzed: true,
+        displayForm: true,
+        hideTimer: true,
+      });
     }
   }
 
@@ -56,8 +71,10 @@ class Clue extends React.Component {
     });
   }
 
+  endTimer = () => this.setState({timesUp: true, buzzed: true});
+
   render() {
-    const { player, displayForm, displayAnswer, guess, isCorrect } = this.state;
+    const { player, displayForm, displayAnswer, guess, isCorrect, timesUp, hideTimer } = this.state;
     const { clue, answer, value, updateScore } = this.props;
     return (
       <div className='clue' tabIndex='0' ref={this.myRef} onKeyDown={this.handleKeyDown} >
@@ -66,8 +83,25 @@ class Clue extends React.Component {
             {clue}
           </h4>
         </div>
-        <div className='clue-timer'>
-          - - - - - timer here - - - - -
+        <div>
+          {
+            hideTimer ?
+            ' ' :
+            (
+              timesUp ?
+              (
+                <div className='timer'>
+                  Time's Up!
+                  <div className='appeal-button' onClick={() => updateScore(0, 1)}>
+                    Continue
+                  </div>
+                </div>
+              ) :
+              (
+                <ClueTimer endTimer={this.endTimer} />
+              )
+            )
+          }
         </div>
         <div className='clue-answer'>
           {
