@@ -4,7 +4,7 @@
   "description": "A fun homage to the show Jeopardy",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "webpack --watch --mode='development'",
     "start": "webpack --mode='production' && node server/index.js"
   },
