@@ -4,7 +4,7 @@ import update from 'immutability-helper';
 import Clue from '../clue/clue.component';
 import Category from '../category/category.component';
 import Score from '../score/score.component';
-import './board.styles';
+import './board.styles.css';
 
 
 class Board extends React.Component {

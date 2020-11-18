@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './category-title.styles';
+import './category-title.styles.css';
 
 
 const CategoryTitle = ({ clue: { category } }) => (

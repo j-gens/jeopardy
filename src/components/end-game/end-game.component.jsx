@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './end-game.styles';
+import './end-game.styles.css';
 
 
 const EndGame = ({ winner }) => (

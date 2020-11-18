@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './welcome.styles';
+import './welcome.styles.css';
 
 
 const Welcome = ({ generateGame, joinGame }) => (

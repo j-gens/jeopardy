@@ -3,7 +3,7 @@ import React from 'react';
 import GuessForm from '../guess-form/guess-form.component';
 import Answer from '../answer/answer.component';
 import ClueTimer from '../clue-timer/clue-timer.component';
-import './clue.styles';
+import './clue.styles.css';
 
 
 class Clue extends React.Component {

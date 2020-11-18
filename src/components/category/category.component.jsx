@@ -2,7 +2,7 @@ import React from 'react';
 
 import CategoryTitle from '../category-title/category-title.component';
 import CategoryCell from '../category-cell/category-cell.component';
-import './category.styles';
+import './category.styles.css';
 
 
 const Category = ({ category, ...otherProps }) => (

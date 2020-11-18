@@ -5,7 +5,7 @@ import Board from './components/board/board.component';
 import Welcome from './components/welcome/welcome.component';
 import EndGame from './components/end-game/end-game.component';
 import { getGameClues, generateCategoryIds, makeConsistentClueValues } from './utils/jservice';
-import './app.styles';
+import './app.styles.css';
 
 
 class App extends React.Component {
