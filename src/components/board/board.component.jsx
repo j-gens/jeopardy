@@ -1,10 +1,10 @@
 import React from 'react';
 import update from 'immutability-helper';
 
-import Clue from '../clue/clue.component.jsx';
-import Category from '../category/category.component.jsx';
-import Score from '../score/score.component.jsx';
-import './board.styles.css';
+import Clue from '../clue/clue.component';
+import Category from '../category/category.component';
+import Score from '../score/score.component';
+import './board.styles';
 
 
 class Board extends React.Component {

@@ -1,11 +1,11 @@
 import React from 'react';
 import update from 'immutability-helper';
 
-import Board from './components/board/board.component.jsx';
-import Welcome from './components/welcome/welcome.component.jsx';
-import EndGame from './components/end-game/end-game.component.jsx';
-import { getGameClues, generateCategoryIds, makeConsistentClueValues } from './utils/jservice.js';
-import './app.styles.css';
+import Board from './components/board/board.component';
+import Welcome from './components/welcome/welcome.component';
+import EndGame from './components/end-game/end-game.component';
+import { getGameClues, generateCategoryIds, makeConsistentClueValues } from './utils/jservice';
+import './app.styles';
 
 
 class App extends React.Component {

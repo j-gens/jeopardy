@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './guess-form.styles.css';
+import './guess-form.styles';
 
 
 class GuessForm extends React.Component {

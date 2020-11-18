@@ -1,9 +1,9 @@
 import React from 'react';
 
-import GuessForm from '../guess-form/guess-form.component.jsx';
-import Answer from '../answer/answer.component.jsx';
-import ClueTimer from '../clue-timer/clue-timer.component.jsx';
-import './clue.styles.css';
+import GuessForm from '../guess-form/guess-form.component';
+import Answer from '../answer/answer.component';
+import ClueTimer from '../clue-timer/clue-timer.component';
+import './clue.styles';
 
 
 class Clue extends React.Component {

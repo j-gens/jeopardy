@@ -1,8 +1,8 @@
 import React from 'react';
 
-import CategoryTitle from '../category-title/category-title.component.jsx';
-import CategoryCell from '../category-cell/category-cell.component.jsx';
-import './category.styles.css';
+import CategoryTitle from '../category-title/category-title.component';
+import CategoryCell from '../category-cell/category-cell.component';
+import './category.styles';
 
 
 const Category = ({ category, ...otherProps }) => (

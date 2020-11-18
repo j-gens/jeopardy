@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './answer.styles.css';
+import './answer.styles';
 
 
 class Answer extends React.Component {

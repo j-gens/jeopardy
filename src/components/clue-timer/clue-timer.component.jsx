@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './clue-timer.styles.css';
+import './clue-timer.styles';
 
 
 class ClueTimer extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './category-cell.styles.css';
+import './category-cell.styles';
 
 
 class CategoryCell extends React.Component {

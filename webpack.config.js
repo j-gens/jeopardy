@@ -3,12 +3,6 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.jsx',
-  // output: {
-  //   filename: '[name].bundle.js',
-  //   chunkFilename: '[name].bundle.js',
-  //   path: path.resolve(__dirname, 'dist'),
-  //   publicPath: '/',
-  // },
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "./dist")
@@ -43,9 +37,11 @@ module.exports = {
       },
     ],
   },
-  // plugins: [
-  //   new webpack.optimize.SplitChunksPlugin(),
-  // ],
+  resolve: {
+    extensions: [
+      '.js', '.jsx', '.css'
+    ],
+  },
   watchOptions: {
     ignored: /node_modules/,
   },
