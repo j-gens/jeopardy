@@ -1,0 +1,6 @@
+{
+  "testRegex": "((\\.|/*.)(spec))\\.js?$",
+  "moduleNameMapper": {
+    "\\.(css|less)$": "<rootDir>/test/__mocks__/styleMock.js"
+  }
+}
