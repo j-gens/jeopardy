@@ -8,7 +8,7 @@ const Welcome = ({ generateGame, joinGame }) => (
     <div className='welcome--message'>
       Welcome to Jeopardy!  Are you ready to have some fun?
     </div>
-      <div className='welcome--button' onClick={generateGame}>
+      <div className='welcome--button' onClick={generateGame} data-testid='welcome--button'>
         <h3>
           Start New Game
         </h3>

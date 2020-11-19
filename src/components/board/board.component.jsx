@@ -60,7 +60,7 @@ class Board extends React.Component {
     const { updateScore, scores, display, currentClue, currentAnswer, currentValue, clueCounter } = this.state;
     return (
       <div className='gamespace'>
-        <div className='board'>
+        <div className='board' data-testid='board'>
           {
             display ?
             <Clue
