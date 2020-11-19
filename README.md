@@ -6,6 +6,7 @@
 * [Technologies](https://github.com/j-gens/jeopardy#technologies)
 * [Getting Started](https://github.com/j-gens/jeopardy#getting-started)
   * [Installing](https://github.com/j-gens/jeopardy#installing)
+  * [Testing](https://github.com/j-gens/jeopardy#testing)
 * [Game Instructions](https://github.com/j-gens/jeopardy#game-instructions)
 * [License](https://github.com/j-gens/jeopardy#license)
 
@@ -35,6 +36,8 @@ Currently the app represents my minimum viable product.  However, there are many
 * Babel
 * HTML5 / CSS
 * Node.js / Express
+* Jest
+* react-testing-library
 
 ## Getting Started
 
@@ -59,6 +62,13 @@ npm install
 npm start
 ```
 7. View in browser by going to [http://localhost:3000](http://localhost:3000)
+
+#### Testing
+
+Testing was done with Jest and react-testing-library.  Run the Jest testing suite with the  easy command:
+```
+npm test
+```
 
 ## Game Instructions
 
